@@ -16,7 +16,7 @@ type Inquirer interface {
 	Get(resource string, out interface{}) error
 	Post(resource string, body []byte, out interface{}) error
 	Put(resource string, body []byte, out interface{}) error
-	Delete(resource string) (int, error)
+	Delete(resource string, out interface{}) error
 }
 
 // APIError is an error returned from the DragonChain API.
@@ -53,6 +53,23 @@ func (e *APIError) Error() string {
 // such as fmt.Sprintf and fmt.Errorf.
 func (e *APIError) String() string {
 	return e.Error()
+}
+
+// QueryOptions defines various parameters to be used when
+// querying.
+type QueryOptions struct {
+	// QueryString is a Lucene query string that will be used to query.
+	QueryString string
+	// Sort is an optional string that defines how query results should be
+	// sorted.
+	Sort string
+	// Offset declares the within the result array to return. All results before
+	// this offset will be dropped before returning. This, along with Limit, allows
+	// for server-side pagination.
+	Offset int
+	// Limit is the maximum number of results to return, starting with the provided Offset,
+	// allowing for network-effecitent server-side pagination.
+	Limit int
 }
 
 // Client is used to interact with a DragonChain using the DragonChain API.

@@ -66,8 +66,8 @@ func (iq *inquirer) Put(resource string, body []byte, out interface{}) error {
 	return iq.doRequest(http.MethodPut, resource, "application/json", body, out)
 }
 
-func (iq *inquirer) Delete(resource string) (int, error) {
-	return 0, iq.doRequest(http.MethodDelete, resource, "", nil, nil)
+func (iq *inquirer) Delete(resource string, out interface{}) error {
+	return iq.doRequest(http.MethodDelete, resource, "", nil, out)
 }
 
 func (iq *inquirer) doRequest(method, resource, contentType string, body []byte, out interface{}) error {

@@ -114,24 +114,6 @@ func (c *Client) CreateTransaction(def *TransactionDefinition) (string, error) {
 	return resp.Response.ID, nil
 }
 
-// QueryOptions defines various parameters to be used when
-// querying transactions.
-type QueryOptions struct {
-	// QueryString is a Lucene query string that will be used to query
-	// the transactions.
-	QueryString string
-	// Sort is an optional string that defines how query results should be
-	// sorted.
-	Sort string
-	// Offset declares the within the result array to return. All results before
-	// this offset will be dropped before returning. This, along with Limit, allows
-	// for server-side pagination.
-	Offset int
-	// Limit is the maximum number of results to return, starting with the provided Offset,
-	// allowing for network-effecitent server-side pagination.
-	Limit int
-}
-
 // QueryTransactions queries all transactions on a DragonChain blockchain using the provided
 // QueryOptions, returning a list of Transactions that match the query.
 //
